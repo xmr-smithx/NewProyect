@@ -32,7 +32,7 @@ class DirectoryReader(object):
                 return [self._path2]
 
             #diurno
-            elif now_time >= time(20,00) and now_time <= time(05,00):
+            elif now_time >= time(20,00) and now_time <= time(04,59):
                 return [self._path3]
     
 
