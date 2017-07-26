@@ -1,16 +1,41 @@
 # Copyright 2015 Adafruit Industries.
 # Author: Tony DiCola
 # License: GNU GPLv2, see LICENSE.txt
+from datetime import datetime, time
 class DirectoryReader(object):
 
     def __init__(self, config):
         """Create an instance of a file reader that just reads a single
         directory on disk.
         """
-        self._load_config(config)
 
-    def _load_config(self, config):
-        self._path = config.get('directory', 'path')
+        #aqui debe ir el control de los horarios
+        now = datetime.now()
+        now_time = now.time()
+
+            
+            #matutino
+            if now_time >= time(05,00) and now_time <= time(11,00):
+                self._load_configa(config)
+
+            #vespertino
+            elif now_time >= time(11,00) and now_time <= time(20,00):
+                self._load_configb(config)
+
+            #diurno
+            elif now_time >= time(20,00) and now_time <= time(05,00):
+                self._load_configc(config)
+                
+
+    def _load_configa(self, config):
+        self._path = config.get('directory', 'path1')
+
+    def _load_configb(self, config):
+        self._path = config.get('directory', 'path2')
+
+    def _load_configc(self, config):
+        self._path = config.get('directory', 'path3')
+        
 
     def search_paths(self):
         """Return a list of paths to search for files."""
