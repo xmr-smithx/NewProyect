@@ -1,7 +1,6 @@
 # Copyright 2015 Adafruit Industries.
 # Author: Tony DiCola
 # License: GNU GPLv2, see LICENSE.txt
-from datetime import datetime, time
 class DirectoryReader(object):
 
     def __init__(self, config):
@@ -11,30 +10,11 @@ class DirectoryReader(object):
         self._load_config(config)
 
     def _load_config(self, config):
-        self._path1 = config.get('directory', 'path1')
-        self._path2 = config.get('directory', 'path2')
-        self._path3 = config.get('directory', 'path3')
+        self._path = config.get('directory', 'path')
 
     def search_paths(self):
         """Return a list of paths to search for files."""
-
-        #aqui debe ir el control de los horarios
-        now = datetime.now()
-        now_time = now.time()
-
-
-            #matutino
-            if now_time >= time(05,00) and now_time <= time(11,00):
-                return [self._path1]
-
-            #vespertino
-            elif now_time >= time(11,00) and now_time <= time(20,00):
-                return [self._path2]
-
-            #diurno
-            elif now_time >= time(20,00) and now_time <= time(04,59):
-                return [self._path3]
-    
+        return [self._path]
 
     def is_changed(self):
         """Return true if the file search paths have changed."""
