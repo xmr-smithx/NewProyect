@@ -41,6 +41,9 @@ from model import Playlist
 class VideoLooper(object):
 
     def __init__(self, config_path):
+        now = datetime.now()
+        now_time = now.time()
+        
         """Create an instance of the main video looper application class. Must
         pass path to a valid video looper ini configuration file.
         """
@@ -109,8 +112,7 @@ class VideoLooper(object):
         extensions.
         """
         # Get list of paths to search from the file reader.
-        now = datetime.now()
-        now_time = now.time()
+
         
             #matutino
             if time(05,30) <= now.time() <= time(11,30):
