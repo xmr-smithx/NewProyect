@@ -113,16 +113,15 @@ class VideoLooper(object):
         now_time = now.time()
         
             #matutino
-            if now_time >= time(05,00) and now_time <= time(11,00):
+            if time(05,30) <= now.time() <= time(11,30):
                 paths = self._reader.search_paths1()
-
-            #vespertino
-            elif now_time >= time(11,00) and now_time <= time(20,00):
+                
+            if time(11,30) <= now.time() <= time(17,30):
                 paths = self._reader.search_paths2()
-
-            #diurno
-            elif now_time >= time(20,00) and now_time <= time(05,00):
+                
+            if time(17,30) <= now.time() <= time(05,30):
                 paths = self._reader.search_paths3()
+
 
         
         # Enumerate all movie files inside those paths.
