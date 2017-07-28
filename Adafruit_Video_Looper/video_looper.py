@@ -109,6 +109,8 @@ class VideoLooper(object):
         extensions.
         """
         # Get list of paths to search from the file reader.
+        now = datetime.now()
+        now_time = now.time()
         
             #matutino
             if now_time >= time(05,00) and now_time <= time(11,00):
