@@ -10,9 +10,9 @@ class DirectoryReader(object):
         self._load_config(config)
 
     def _load_config(self, config):
-        self._path1 = config.get('directory1', 'path1')
-        self._path2 = config.get('directory2', 'path2')
-        self._path3 = config.get('directory3', 'path3')
+        self._path1 = config.get('directory', 'path1')
+        self._path2 = config.get('directory', 'path2')
+        self._path3 = config.get('directory', 'path3')
 
 
         
