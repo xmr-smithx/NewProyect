@@ -11,7 +11,6 @@ import time
 
 import pygame
 
-from datetime import datetime, time
 from model import Playlist
 
 
@@ -41,9 +40,6 @@ from model import Playlist
 class VideoLooper(object):
 
     def __init__(self, config_path):
-        now = datetime.now()
-        now_time = now.time()
-        
         """Create an instance of the main video looper application class. Must
         pass path to a valid video looper ini configuration file.
         """
@@ -112,20 +108,7 @@ class VideoLooper(object):
         extensions.
         """
         # Get list of paths to search from the file reader.
-
-        
-            #matutino
-            if time(05,30) <= now.time() <= time(11,30):
-                paths = self._reader.search_paths1()
-                
-            if time(11,30) <= now.time() <= time(17,30):
-                paths = self._reader.search_paths2()
-                
-            if time(17,30) <= now.time() <= time(05,30):
-                paths = self._reader.search_paths3()
-
-
-        
+        paths = self._reader.search_paths()
         # Enumerate all movie files inside those paths.
         movies = []
         for ex in self._extensions:
