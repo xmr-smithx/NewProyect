@@ -10,7 +10,7 @@ import signal
 import time
 
 import pygame
-import datetime, time
+from datetime import datetime, time
 from model import Playlist
 
 
