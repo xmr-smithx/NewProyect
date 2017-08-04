@@ -109,8 +109,7 @@ class VideoLooper(object):
         """Search all the file reader paths for movie files with the provided
         extensions.
         """
-        now = datetime.now()
-        now_time = now.time()
+
         # Get list of paths to search from the file reader.
         if now_time >= time(5,00) and now_time <= time(11,00):
             paths = self._reader.search_paths1()
@@ -186,8 +185,7 @@ class VideoLooper(object):
             time.sleep(1)
 
     def _idle_message(self):
-        now = datetime.now()
-        now_time = now.time()
+
         """Print idle message from file reader."""
         # Print message to console.
         if now_time >= time(5,00) and now_time <= time(11,00):
@@ -223,6 +221,8 @@ class VideoLooper(object):
     def run(self):
         """Main program loop.  Will never return!"""
         # Get playlist of movies to play from file reader.
+        now = datetime.now()
+        now_time = now.time()
 
         playlist = self._build_playlist()
         self._prepare_to_run_playlist(playlist)
