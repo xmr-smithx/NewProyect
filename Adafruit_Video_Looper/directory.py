@@ -34,7 +34,7 @@ class DirectoryReader(object):
         # true if new files are added/removed from the directory.  This is 
         # called in a tight loop of the main program so it needs to be fast and
         # not resource intensive.
-        return False
+        return True
 
     def idle_message1(self):
         """Return a message to display when idle and no files are found."""
