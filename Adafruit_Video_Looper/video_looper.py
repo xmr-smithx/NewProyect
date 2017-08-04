@@ -49,7 +49,8 @@ class VideoLooper(object):
             raise RuntimeError('Failed to find configuration file at {0}, is the application properly installed?'.format(config_path))
         self._console_output = self._config.getboolean('video_looper', 'console_output')
         # Load configured video player and file reader modules.
-
+        now = datetime.now()
+        now_time = now.time()
         self._player = self._load_player()
         self._reader = self._load_file_reader()
         # Load other configuration values.
@@ -221,9 +222,6 @@ class VideoLooper(object):
     def run(self):
         """Main program loop.  Will never return!"""
         # Get playlist of movies to play from file reader.
-        now = datetime.now()
-        now_time = now.time()
-
         playlist = self._build_playlist()
         self._prepare_to_run_playlist(playlist)
         # Main loop to play videos in the playlist and listen for file changes.
