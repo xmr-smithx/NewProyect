@@ -11,9 +11,9 @@ class DirectoryReader(object):
         self._load_config(config)
 
     def _load_config(self, config):
-        self._path1 = config.get('directory', 'path1')
-        self._path2 = config.get('directory', 'path2')
-        self._path3 = config.get('directory', 'path3')
+        self._path1 = config.get('directory1', 'path1')
+        self._path2 = config.get('directory2', 'path2')
+        self._path3 = config.get('directory3', 'path3')
 
     def search_paths1(self):
         """Return a list of paths to search for files."""
@@ -34,7 +34,7 @@ class DirectoryReader(object):
         # true if new files are added/removed from the directory.  This is 
         # called in a tight loop of the main program so it needs to be fast and
         # not resource intensive.
-        return True
+        return False
 
     def idle_message1(self):
         """Return a message to display when idle and no files are found."""
