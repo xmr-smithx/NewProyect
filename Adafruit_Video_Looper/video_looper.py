@@ -50,7 +50,7 @@ class VideoLooper(object):
         self._console_output = self._config.getboolean('video_looper', 'console_output')
         # Load configured video player and file reader modules.
         now = datetime.now()
-        now_time = now.time()
+
         self._player = self._load_player()
         self._reader = self._load_file_reader()
         # Load other configuration values.
@@ -112,11 +112,11 @@ class VideoLooper(object):
         """
 
         # Get list of paths to search from the file reader.
-        if now_time >= time(5,00) and now_time <= time(11,00):
+        if time(7,00) <= now.time() <= time(11,30):
             paths = self._reader.search_paths1()
-        if now_time >= time(11,00) and now_time <= time(20,00):
+        if time(11,30) <= now.time() <= time(20,30):
             paths = self._reader.search_paths2()
-        if now_time >= time(20,00) and now_time <= time(5,00):
+        if time(20,30) <= now.time() <= time(7,00):
             paths = self._reader.search_paths3()
         # Enumerate all movie files inside those paths.
         movies = []
@@ -189,13 +189,13 @@ class VideoLooper(object):
 
         """Print idle message from file reader."""
         # Print message to console.
-        if now_time >= time(5,00) and now_time <= time(11,00):
+        if time(7,00) <= now.time() <= time(11,30):
             message = self._reader.idle_message1()
 
-        if now_time >= time(11,00) and now_time <= time(20,00):
+        if time(11,30) <= now.time() <= time(20,30):
             message = self._reader.idle_message2()
             
-        if now_time >= time(20,00) and now_time <= time(5,00):
+        if time(20,30) <= now.time() <= time(7,00):
             message = self._reader.idle_message3()
         self._print(message)
         # Do nothing else if the OSD is turned off.
