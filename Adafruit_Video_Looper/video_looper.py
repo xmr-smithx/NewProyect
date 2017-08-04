@@ -49,8 +49,7 @@ class VideoLooper(object):
             raise RuntimeError('Failed to find configuration file at {0}, is the application properly installed?'.format(config_path))
         self._console_output = self._config.getboolean('video_looper', 'console_output')
         # Load configured video player and file reader modules.
-        now = datetime.now()
-        now_time = now.time()
+
         self._player = self._load_player()
         self._reader = self._load_file_reader()
         # Load other configuration values.
@@ -111,11 +110,11 @@ class VideoLooper(object):
         extensions.
         """
         # Get list of paths to search from the file reader.
-        if now_time >= time(7,00) and now_time <= time(11,30):
+        if time(7,00) <= now.time() <= time(11,30):
             paths = self._reader.search_paths1()
-        if now_time >= time(11,30) and now_time <= time(20,30):
+        if time(11,30) <= now.time() <= time(20,30):
             paths = self._reader.search_paths2()
-        if now_time >= time(20,30) and now_time <= time(7,00):
+        if time(20,30) <= now.time() <= time(7,00):
             paths = self._reader.search_paths3()
         # Enumerate all movie files inside those paths.
         movies = []
@@ -187,13 +186,13 @@ class VideoLooper(object):
     def _idle_message(self):
         """Print idle message from file reader."""
         # Print message to console.
-        if now_time >= time(7,00) and now_time <= time(11,30):
+        if time(7,00) <= now.time() <= time(11,30):
             message = self._reader.idle_message1()
 
-        if now_time >= time(11,30) and now_time <= time(20,30):
+        if time(11,30) <= now.time() <= time(20,30):
             message = self._reader.idle_message2()
             
-        if now_time >= time(20,30) and now_time <= time(7,00):
+        if time(20,30) <= now.time() <= time(7,00):
             message = self._reader.idle_message3()
         self._print(message)
         # Do nothing else if the OSD is turned off.
@@ -220,6 +219,8 @@ class VideoLooper(object):
     def run(self):
         """Main program loop.  Will never return!"""
         # Get playlist of movies to play from file reader.
+        now = datetime.now()
+        now_time = now.time()
         playlist = self._build_playlist()
         self._prepare_to_run_playlist(playlist)
         # Main loop to play videos in the playlist and listen for file changes.
