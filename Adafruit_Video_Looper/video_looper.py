@@ -49,6 +49,8 @@ class VideoLooper(object):
             raise RuntimeError('Failed to find configuration file at {0}, is the application properly installed?'.format(config_path))
         self._console_output = self._config.getboolean('video_looper', 'console_output')
         # Load configured video player and file reader modules.
+        now = datetime.now()
+        now_time = now.time()
         self._player = self._load_player()
         self._reader = self._load_file_reader()
         # Load other configuration values.
@@ -104,8 +106,7 @@ class VideoLooper(object):
             return False
     
     def _build_playlist(self):
-        now = datetime.now()
-        now_time = now.time()
+        
         """Search all the file reader paths for movie files with the provided
         extensions.
         """
@@ -184,8 +185,6 @@ class VideoLooper(object):
             time.sleep(1)
 
     def _idle_message(self):
-        now = datetime.now()
-        now_time = now.time()
         """Print idle message from file reader."""
         # Print message to console.
         if now_time >= time(7,00) and now_time <= time(11,30):
