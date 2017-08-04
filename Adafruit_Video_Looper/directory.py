@@ -1,7 +1,6 @@
 # Copyright 2015 Adafruit Industries.
 # Author: Tony DiCola
 # License: GNU GPLv2, see LICENSE.txt
-from datetime import datetime, time
 
 class DirectoryReader(object):
 
