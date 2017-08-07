@@ -10,7 +10,7 @@ import signal
 import time
 
 import pygame
-from datetime import datetime, time
+
 from model import Playlist
 
 
@@ -49,8 +49,6 @@ class VideoLooper(object):
             raise RuntimeError('Failed to find configuration file at {0}, is the application properly installed?'.format(config_path))
         self._console_output = self._config.getboolean('video_looper', 'console_output')
         # Load configured video player and file reader modules.
-        
-
         self._player = self._load_player()
         self._reader = self._load_file_reader()
         # Load other configuration values.
@@ -106,18 +104,11 @@ class VideoLooper(object):
             return False
     
     def _build_playlist(self):
-        
         """Search all the file reader paths for movie files with the provided
         extensions.
         """
-        now = datetime.now()
         # Get list of paths to search from the file reader.
-        if time(7,00) <= now.time() <= time(11,30):
-            paths = self._reader.search_paths1()
-        if time(11,30) <= now.time() <= time(20,30):
-            paths = self._reader.search_paths2()
-        if time(20,30) <= now.time() <= time(7,00):
-            paths = self._reader.search_paths3()
+        paths = self._reader.search_paths()
         # Enumerate all movie files inside those paths.
         movies = []
         for ex in self._extensions:
@@ -186,18 +177,9 @@ class VideoLooper(object):
             time.sleep(1)
 
     def _idle_message(self):
-        now = datetime.now()
-
         """Print idle message from file reader."""
         # Print message to console.
-        if time(7,00) <= now.time() <= time(11,30):
-            message = self._reader.idle_message1()
-
-        if time(11,30) <= now.time() <= time(20,30):
-            message = self._reader.idle_message2()
-            
-        if time(20,30) <= now.time() <= time(7,00):
-            message = self._reader.idle_message3()
+        message = self._reader.idle_message()
         self._print(message)
         # Do nothing else if the OSD is turned off.
         if not self._osd:
