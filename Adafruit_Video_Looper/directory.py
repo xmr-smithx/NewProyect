@@ -10,21 +10,11 @@ class DirectoryReader(object):
         self._load_config(config)
 
     def _load_config(self, config):
-        self._path1 = config.get('directory', 'path1')
-        self._path2 = config.get('directory2', 'path2')
-        self._path3 = config.get('directory3', 'path3')
+        self._path = config.get('directory', 'path')
 
-    def search_pathsa(self):
+    def search_paths(self):
         """Return a list of paths to search for files."""
-        return [self._path1]
-    
-    def search_pathsb(self):
-        """Return a list of paths to search for files."""
-        return [self._path2]
-    
-    def search_pathsc(self):
-        """Return a list of paths to search for files."""
-        return [self._path3]
+        return [self._path]
 
     def is_changed(self):
         """Return true if the file search paths have changed."""
@@ -35,17 +25,9 @@ class DirectoryReader(object):
         # not resource intensive.
         return False
 
-    def idle_messagea(self):
+    def idle_message(self):
         """Return a message to display when idle and no files are found."""
-        return 'No files found in {0}'.format(self._path1)
-    
-    def idle_messageb(self):
-        """Return a message to display when idle and no files are found."""
-        return 'No files found in {0}'.format(self._path2)
-    
-    def idle_messagec(self):
-        """Return a message to display when idle and no files are found."""
-        return 'No files found in {0}'.format(self._path3)
+        return 'No files found in {0}'.format(self._path)
 
 
 def create_file_reader(config):
