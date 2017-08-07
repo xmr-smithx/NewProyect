@@ -12,7 +12,6 @@ import time
 import pygame
 
 from model import Playlist
-from datetime import datetime, time
 
 
 # Basic video looper architecure:
@@ -109,16 +108,7 @@ class VideoLooper(object):
         extensions.
         """
         # Get list of paths to search from the file reader.
-        
-        if now_time >= time(7,00) and now_time <= time(11,30):
-            paths = self._render.search_pathsa()
-            
-        if now_time >= time(11,30) and now_time <= time(17,30):
-            paths = self._render.search_pathsb()
-            
-        if now_time >= time(17,30) and now_time <= time(7,00):
-            paths = self._render.search_pathsc()
-            
+        paths = self._reader.search_paths()
         # Enumerate all movie files inside those paths.
         movies = []
         for ex in self._extensions:
@@ -189,16 +179,7 @@ class VideoLooper(object):
     def _idle_message(self):
         """Print idle message from file reader."""
         # Print message to console.
-        if now_time >= time(7,00) and now_time <= time(11,30):
-            message = self._reader.idle_messagea()
-            
-        if now_time >= time(11,30) and now_time <= time(17,30):
-            message = self._reader.idle_messageb()
-            
-        if now_time >= time(17,30) and now_time <= time(7,00):
-            message = self._reader.idle_messagec()
-            
-        
+        message = self._reader.idle_message()
         self._print(message)
         # Do nothing else if the OSD is turned off.
         if not self._osd:
@@ -222,8 +203,6 @@ class VideoLooper(object):
             self._idle_message()
 
     def run(self):
-        now = datetime.now()
-        now_time = now.time()
         """Main program loop.  Will never return!"""
         # Get playlist of movies to play from file reader.
         playlist = self._build_playlist()
